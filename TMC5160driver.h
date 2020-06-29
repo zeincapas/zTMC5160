@@ -27,7 +27,16 @@ class TMC5160
     void modifyBits(void); //TODO
     void pushCommands(void); //TODO
 
+    //General Configuration Registers
+    
+    //GCONF
+    
 
+    //Ramp Generator Motion Control Register Set
+
+    //Velocity Dependent Driver Feature Control Register Set
+
+    //Motor Driver Register Set
 
 };
 
