@@ -27,6 +27,19 @@ class TMC5160
     void modifyBits(void); //TODO
     void pushCommands(void); //TODO
 
+    //CHOPCONF
+    void mres(uint32_t* buffer); //4 bits: 0000 = 256, 0001 = 128, 1000 = FULLSTEP
+    void tpfd(uint32_t* buffer); //4 bits: Dampens motor mid-range resonances, 0000:Disable, 1111:1...15
+    void vhighchm(uint32_t* buffer); //1 bit:  VHIGH (velocity) threshold can be exceeded
+    void vhighfs(uint32_t* buffer); //1 bit: Go into fullstep when VHIGH is exceeded
+    void tbl(uint32_t* buffer); //2 bit: Comparator blank time. 00 = 16, 01 = 24, 10 = 36, 11 = 54
+    void hend(uint32_t* buffer); //4 bit: Hysteresis low value offset
+    void hstrt(uint32_t* buffer); //3 bit: Hysteresis start value added to hend
+    void toff(uint32_t* buffer); //4 bit: Off time setting control duration of slow decay phase
+
+    
+
+
     //General Configuration Registers
     
     //GCONF

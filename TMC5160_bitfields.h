@@ -1,7 +1,9 @@
 #ifndef TMC5160_BITFIELDS_H_
 #define TMC5160_BITFIELDS_H_
 
-//General configuration 
+#include <stdint.h>
+
+//GENERAL CONFIGURATION REGISTERS
 
 struct GCONF
 {
@@ -18,7 +20,9 @@ struct GLOBAL_SCALER
     const uint8_t address = 0x0B;
 };
 
-//Velocity dependent driver feature
+
+
+//VELOCITY DEPENDENT REGISTERS
 
 struct IHOLD_IRUN 
 {
@@ -50,7 +54,9 @@ struct THIGH
     const uint8_t address = 0x15;
 };
 
-//Ramp generator motion control register set
+
+
+//RAMP GENERATOR REGISTERS 
 
 struct RAMPMODE
 {
@@ -139,6 +145,91 @@ struct XLATCH
     const uint8_t address = 0x36;
 };
 
+
+
+//MOTOR DRIVER REGISTERS
+
+struct MSLUT0
+{
+    const uint8_t address = 0x60;
+    uint32_t reg;
+};
+
+struct MSLUT1
+{
+    const uint8_t address = 0x61;
+    uint32_t reg;
+};
+
+struct MSLUT2
+{
+    const uint8_t address = 0x62;
+    uint32_t reg;
+};
+
+struct MSLUT3
+{
+    const uint8_t address = 0x63;
+    uint32_t reg;
+};
+
+struct MSLUT4
+{
+    const uint8_t address = 0x64;
+    uint32_t reg;
+};
+
+struct MSLUT5
+{
+    const uint8_t address = 0x65;
+    uint32_t reg;
+};
+
+struct MSLUT6
+{
+    const uint8_t address = 0x66;
+    uint32_t reg;
+};
+
+struct MSLUT7
+{
+    const uint8_t address = 0x67;
+    uint32_t reg;
+};
+
+//Look up table later
+struct MSLUTSEL
+{
+    const uint8_t address = 0x68;
+    uint32_t reg;
+};
+
+struct MSLUTSTART
+{
+    const uint8_t address = 0x69;
+    uint32_t reg;
+};
+
+//Look up table
+struct CHOPCONF
+{
+    const uint8_t address = 0x6C;
+    uint32_t reg;
+};
+
+//Look up table
+struct COOLCONF
+{
+    const uint8_t address = 0x6D;
+    uint32_t reg; 
+};
+
+//Lookup table
+struct PWMCONF
+{
+    const uint8_t address = 0x70;
+    uint32_t reg;
+};
 
 
 #endif
