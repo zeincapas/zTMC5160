@@ -24,7 +24,7 @@ class TMC5160
     //Bitfield constructor functions
     void init(void); //TODO
     void write(void); //TODO
-    void modifyBits(void); //TODO
+    void modifyBits(uint32_t mask, uint32_t edit, uint32_t* reg); //TODO
     void pushCommands(void); //TODO
 
     //CHOPCONF
@@ -46,7 +46,7 @@ class TMC5160
     void pwm_freq1(uint32_t* buffer); //2 bit: Set to 1
     void pwm_grad(uint32_t* buffer); //8 bit: Initialize user defined amplitude gradient; Set to 25
     void pwm_ofs(uint32_t* buffer); //8 bits: Initialize user defined amplited offset; Set to 30
-    
+
 
 
 
