@@ -3,6 +3,11 @@
 
 #include <stdint.h>
 
+/**********************************************************************************
+**************************************ADDRESSES************************************
+**********************************************************************************/
+
+
 //GENERAL CONFIGURATION REGISTERS
 const uint8_t GCONF_ADDR =  0x00;
 const uint8_t DRV_CONF_ADDR = 0x0A;
@@ -49,6 +54,24 @@ const uint8_t MSLUTSTART_ADDR = 0x69;
 const uint8_t CHOPCONF_ADDR = 0x6C;
 const uint8_t COOLCONF_ADDR = 0x6D;
 const uint8_t PWMCONF_ADDR = 0x70;
+
+
+/**********************************************************************************
+*************************************BITMASKS**************************************
+**********************************************************************************/
+
+struct CHOPCONF
+{
+    const uint32_t mres = 0b1111;
+    const uint32_t tpfd = 0b1111;
+    const uint32_t vhighchm = 0b1;
+    const uint32_t vhighfs = 0b1;
+    const uint32_t tbl = 0b11;
+    const uint32_t hend = 0b1111;
+    const uint32_t hstrt = 0b111;
+    const uint32_t toff = 0b1111;
+
+};
 
 struct TMC5160_reg
 {
