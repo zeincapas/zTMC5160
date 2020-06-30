@@ -5,6 +5,16 @@
 
 //GENERAL CONFIGURATION REGISTERS
 
+struct TMC5160_reg
+{
+    const uint8_t address;
+    uint32_t data;
+    const uint8_t length;
+
+};
+
+// TMC5160 GCONF{0x00, buffer, length};
+
 struct GCONF
 {
     const uint8_t address = 0x00;

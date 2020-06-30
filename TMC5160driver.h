@@ -49,6 +49,7 @@ class TMC5160
     
 
 
+
     //General Configuration Registers
     
     //GCONF
