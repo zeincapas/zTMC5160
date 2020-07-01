@@ -1,3 +1,4 @@
 {
-    "board": "arduino:samd:mkrzero"
+    "board": "arduino:samd:mkrzero",
+    "sketch": "test.ino"
 }

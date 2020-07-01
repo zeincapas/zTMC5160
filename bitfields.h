@@ -1,5 +1,5 @@
-#ifndef TMC5160_BITFIELDS_H_
-#define TMC5160_BITFIELDS_H_
+#ifndef BITFIELDS_H_
+#define BITFIELDS_H_
 
 #include <stdint.h>
 
@@ -55,6 +55,27 @@ const uint8_t CHOPCONF_ADDR = 0x6C;
 const uint8_t COOLCONF_ADDR = 0x6D;
 const uint8_t PWMCONF_ADDR = 0x70;
 
+/**********************************************************************************
+*************************************SHIFT*****************************************
+**********************************************************************************/
+
+const uint8_t CHOPCONF_MRES_SHIFT = 24;
+const uint8_t CHOPCONF_TPFD_SHIFT = 20;
+const uint8_t CHOPCONF_VHIGHCHM_SHIFT = 19;
+const uint8_t CHOPCONF_VHIGHFS_SHIFT = 18;
+const uint8_t CHOPCONF_TBL_SHIFT = 15;
+const uint8_t CHOPCONF_HEND_SHIFT = 7;
+const uint8_t CHOPCONF_HSTRT_SHIFT = 4;
+const uint8_t CHOPCONF_TOFF_SHIFT = 0;
+
+const uint8_t PWMCONF_LIM_SHIFT = 28;
+const uint8_t PWMCONF_REG_SHIFT = 24;
+const uint8_t PWMCONF_FREEWHEEL_SHIFT = 20;
+const uint8_t PWMCONF_AUTOGRAD_SHIFT = 19;
+const uint8_t PWMCONF_AUTOSCALE_SHIFT = 18;
+const uint8_t PWMCONF_FREQ_SHIFT = 16;
+const uint8_t PWMCONF_GRAD_SHIFT = 8;
+const uint8_t PWMCONF_OFS_SHIFT = 0;
 
 /**********************************************************************************
 *************************************BITMASKS**************************************
@@ -73,6 +94,18 @@ struct CHOPCONF
 
 };
 
+struct PWMCONF
+{
+    const uint32_t pwm_lim = 0b1111;
+    const uint32_t pwm_reg = 0b1111;
+    const uint32_t freewheel = 0b11;
+    const uint32_t pwm_autograd = 0b1;
+    const uint32_t pwm_autoscale = 0b1;
+    const uint32_t pwm_freq = 0b11;
+    const uint32_t pwm_grad = 0b11111111;
+    const uint32_t pwm_ofs = 0b11111111;
+};
+
 struct TMC5160_reg
 {
     const uint8_t address;
@@ -80,6 +113,7 @@ struct TMC5160_reg
     const uint8_t bitlength;
 
 };
+
 
 // TMC5160_reg GCONF{GCONF_ADDR, data, bitlength};
 
