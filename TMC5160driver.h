@@ -47,6 +47,17 @@ class TMC5160
         void pwm_grad(uint8_t val); //8 bit: Initialize user defined amplitude gradient; Set to 25
         void pwm_ofs(uint8_t val); //8 bits: Initialize user defined amplited offset; Set to 30
 
+        //COOLCONF
+        void sfilt(bool val); //1 bit: 0: Stall guard is sampled every high time. 1: Filtered, only stall guard sampled every 4 high time. 
+        void sgt(uint8_t val); //7 bit: Stall guard threshold value, the higher it is, the more torque required to indicate stall.
+        void seimin(bool val); //1 bit: Minimum current for smart current control 0: 1/2 of current setting  1: 1/4 of current setting
+        void sedn(uint8_t val); //2 bit: Current down step speed, the higher the value, the more sensitive the current step down is.
+        void semax(uint8_t val); //4 bit: stallGuard2 hysteresis value for smart current control.
+        void seup(uint8_t val); //2 bit: current up step size
+        void semin(uint8_t val); //4 bit: minimum stallGuard2 value for smart current control
+        
+
+        uint32_t COOLCONF_CMD = 0;
         uint32_t CHOPCONF_CMD = 0;
         uint32_t PWMCONF_CMD = 0;
 };

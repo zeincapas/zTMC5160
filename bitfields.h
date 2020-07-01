@@ -77,6 +77,15 @@ const uint8_t PWMCONF_FREQ_SHIFT = 16;
 const uint8_t PWMCONF_GRAD_SHIFT = 8;
 const uint8_t PWMCONF_OFS_SHIFT = 0;
 
+const uint8_t COOLCONF_SFILT_SHIFT = 24;
+const uint8_t COOLCONF_SGT_SHIFT = 16;
+const uint8_t COOLCONF_SEIMIN_SHIFT = 15;
+const uint8_t COOLCONF_SEDN_SHIFT = 13;
+const uint8_t COOLCONF_SEMAX_SHIFT = 8;
+const uint8_t COOLCONF_SEUP_SHIFT = 5;
+const uint8_t COOLCONF_SEMIN_SHIFT = 0;
+
+
 /**********************************************************************************
 *************************************BITMASKS**************************************
 **********************************************************************************/
@@ -104,6 +113,17 @@ struct PWMCONF
     const uint32_t pwm_freq = 0b11;
     const uint32_t pwm_grad = 0b11111111;
     const uint32_t pwm_ofs = 0b11111111;
+};
+
+struct COOLCONF
+{
+    const uint32_t sfilt = 0b1;
+    const uint32_t sgt = 0b1111111;
+    const uint32_t seimin = 0b1;
+    const uint32_t sedn = 0b11;
+    const uint32_t semax = 0b1111;
+    const uint32_t seup = 0b11;
+    const uint32_t semin = 0b1111;
 };
 
 struct TMC5160_reg
