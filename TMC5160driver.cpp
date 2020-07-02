@@ -32,9 +32,9 @@ void TMC5160::modifyBits(uint32_t mask, uint32_t edit, uint32_t* reg)
 void TMC5160::pushCommands()
 {
     // Write to stepper driver
-    write(&CHOPCONF_CMD, CHOPCONF_ADDR);
+    // write(&CHOPCONF_CMD, CHOPCONF_ADDR);
     // write(&COOLCONF_CMD, COOLCONF_ADDR);
-    // write(&PWMCONF_CMD, PWMCONF_ADDR);
+    write(&PWMCONF_CMD, PWMCONF_ADDR);
 }
 
 /*********************************************************************************
@@ -190,9 +190,9 @@ void TMC5160::pwm_reg(uint8_t val)
     uint32_t mask;
     
     //Currently hard coded to default
-    bits = 0x04;
+    bits = 0x06;
     bits = bits << PWMCONF_REG_SHIFT;
-    mask = pwmconf.pwm_reg << PWMCONF_LIM_SHIFT;
+    mask = pwmconf.pwm_reg << PWMCONF_REG_SHIFT;
     modifyBits(mask, bits, &PWMCONF_CMD);
 }
 
