@@ -23,7 +23,7 @@ class TMC5160
 
         //Bitfield constructor functions
         void init(void); //TODO
-        void write(void); //TODO
+        void write(uint32_t* cmd, uint8_t address); //TODO
         void modifyBits(uint32_t mask, uint32_t edit, uint32_t* reg); //TODO
         void pushCommands(void); //TODO
 

@@ -1,13 +1,40 @@
 #include "TMC5160driver.h"
 #include "bitfields.h"
+#include <SPI.h>
 
 CHOPCONF chopconf;
 PWMCONF pwmconf;
+COOLCONF coolconf;
+
+void TMC5160::init()
+{
+    pinMode(cs, OUTPUT);
+}
+
+void TMC5160::write(uint32_t* cmd, uint8_t address)
+{
+    //Acquire constructed bitfield and chop it up to 4 bytes. 
+    char writeField[4] = {(*cmd >> 24) & 0xFF, (*cmd >> 16) & 0xFF, (*cmd >> 8) & 0xFF, (*cmd) & 0xFF};
+    SPI.begin();
+    digitalWrite(cs, LOW);
+    SPI.transfer(address);
+    SPI.transfer(&writeField, 4);
+    digitalWrite(cs, HIGH);
+    SPI.endTransaction();
+}
 
 void TMC5160::modifyBits(uint32_t mask, uint32_t edit, uint32_t* reg)
 {
     //clear the register first and then "OR" it after. 
     *reg = (*reg & ~mask) | edit;
+}
+
+void TMC5160::pushCommands()
+{
+    // Write to stepper driver
+    write(&CHOPCONF_CMD, CHOPCONF_ADDR);
+    // write(&COOLCONF_CMD, COOLCONF_ADDR);
+    // write(&PWMCONF_CMD, PWMCONF_ADDR);
 }
 
 /*********************************************************************************
@@ -111,10 +138,6 @@ void TMC5160::hstrt(uint8_t offset)
     if (offset > 8)
     {
         offset = 8;
-    }
-    else if (offset = 0);
-    {
-        offset = 1;
     }
     bits = offset - 1;
     bits = bits << CHOPCONF_HSTRT_SHIFT;
@@ -245,4 +268,103 @@ void TMC5160::pwm_ofs(uint8_t val)
     modifyBits(mask, bits, &PWMCONF_CMD);
 }
 
+/*********************************************************************************
+************************************ COOLCONF FUNCTIONS ***************************
+*********************************************************************************/
 
+void TMC5160::sfilt(bool flag)
+{
+    uint32_t bits;
+    uint32_t mask;
+    bits = flag << COOLCONF_SFILT_SHIFT;
+    mask = coolconf.sfilt << COOLCONF_SFILT_SHIFT;
+    modifyBits(mask, bits, &COOLCONF_CMD);
+}
+
+void TMC5160::sgt(uint8_t val)
+{
+    //TODO SIgned value
+    uint32_t bits;
+    uint32_t mask; 
+    bits = 4;
+    bits = bits << COOLCONF_SGT_SHIFT;
+    mask = coolconf.sgt << COOLCONF_SGT_SHIFT;
+    modifyBits(mask, bits, &COOLCONF_CMD);    
+}
+
+void TMC5160::seimin(bool flag)
+{
+    uint32_t bits;
+    uint32_t mask;
+    bits = flag << COOLCONF_SEIMIN_SHIFT;
+    mask = coolconf.seimin << COOLCONF_SEIMIN_SHIFT;
+    modifyBits(mask, bits, &COOLCONF_CMD);
+}
+
+void TMC5160::sedn(uint8_t val)
+{
+    uint32_t bits;
+    uint32_t mask;
+    if (val > 3 || val < 0)
+    {
+        bits = 1;
+    }
+    else 
+    {
+        bits = val;
+    }
+    bits = bits << COOLCONF_SEDN_SHIFT;
+    mask = coolconf.sedn << COOLCONF_SEDN_SHIFT;
+    modifyBits(mask, bits, &COOLCONF_CMD);
+}
+
+void TMC5160::semax(uint8_t val)
+{
+    uint32_t bits;
+    uint32_t mask;
+    if (val > 15 || val < 0)
+    {
+        bits = 7;
+    }
+    else 
+    {
+        bits = val;
+    }
+    bits = bits << COOLCONF_SEMAX_SHIFT;
+    mask = coolconf.semax << COOLCONF_SEMAX_SHIFT;
+    modifyBits(mask, bits, &COOLCONF_CMD);
+}
+
+void TMC5160::seup(uint8_t val)
+{
+    uint32_t bits;
+    uint32_t mask;
+    if (val > 3 || val < 0)
+    {
+        bits = 3;
+    }
+    else 
+    {
+        bits = val;
+    }
+    bits = bits << COOLCONF_SEUP_SHIFT;
+    mask = coolconf.seup << COOLCONF_SEUP_SHIFT;
+    modifyBits(mask, bits, &COOLCONF_CMD);
+}
+
+void TMC5160::semin(uint8_t val)
+{
+    uint32_t bits;
+    uint32_t mask;
+    if (val > 15 || val < 0)
+    {
+        bits = 12;
+    }
+    else 
+    {
+        bits = val;
+    }
+    bits = bits << COOLCONF_SEMIN_SHIFT;
+    mask = coolconf.semin << COOLCONF_SEMIN_SHIFT;
+    modifyBits(mask, bits, &COOLCONF_CMD);
+}
