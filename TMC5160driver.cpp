@@ -5,6 +5,9 @@
 CHOPCONF chopconf;
 PWMCONF pwmconf;
 COOLCONF coolconf;
+DRVCONF drvconf;
+IHOLD ihold;
+
 
 void TMC5160::init()
 {
@@ -17,7 +20,7 @@ void TMC5160::write(uint32_t* cmd, uint8_t address)
     char writeField[4] = {(*cmd >> 24) & 0xFF, (*cmd >> 16) & 0xFF, (*cmd >> 8) & 0xFF, (*cmd) & 0xFF};
     SPI.begin();
     digitalWrite(cs, LOW);
-    SPI.transfer(address);
+    SPI.transfer(address + WRITE_ACCESS);
     SPI.transfer(&writeField, 4);
     digitalWrite(cs, HIGH);
     SPI.endTransaction();
@@ -368,3 +371,262 @@ void TMC5160::semin(uint8_t val)
     mask = coolconf.semin << COOLCONF_SEMIN_SHIFT;
     modifyBits(mask, bits, &COOLCONF_CMD);
 }
+
+/*********************************************************************************
+********************************** GCONF FUNCTIONS *******************************
+*********************************************************************************/
+
+void TMC5160::smallHysteresis(bool flag)
+{
+    uint32_t bits;
+    uint32_t mask;
+    bits = flag << GCONF_SMALL_HYSTERESIS_SHIFT;
+    mask = 0b1 << GCONF_SMALL_HYSTERESIS_SHIFT;
+    modifyBits(mask, bits, &GCONF_CMD);
+}
+
+void TMC5160::shaft(bool flag)
+{
+    uint32_t bits;
+    uint32_t mask;
+    bits = flag << GCONF_SHAFT_SHIFT;
+    mask = 0b1 << GCONF_SHAFT_SHIFT;
+    modifyBits(mask, bits, &GCONF_CMD);
+}
+
+void TMC5160::pwmMode(bool flag)
+{
+    uint32_t bits;
+    uint32_t mask;
+    bits = flag << GCONF_PWM_MODE_SHIFT;
+    mask = 0b1 << GCONF_PWM_MODE_SHIFT;
+    modifyBits(mask, bits, &GCONF_CMD);
+}
+
+void TMC5160::fastStandStill(bool flag)
+{
+    uint32_t bits;
+    uint32_t mask;
+    bits = flag << GCONF_FAST_STANDSTILL_SHIFT;
+    mask = 0b1 << GCONF_FAST_STANDSTILL_SHIFT;
+    modifyBits(mask, bits, &GCONF_CMD);
+}
+
+/*********************************************************************************
+********************************** XCOMPARE FUNCTIONS ****************************
+*********************************************************************************/
+
+void TMC5160::positionCompare(uint32_t val)
+{
+    uint32_t* reg;
+    reg = &XCOMPARE_CMD;
+    *reg = val;
+}
+
+/*********************************************************************************
+********************************** DRVCONF FUNCTIONS *****************************
+*********************************************************************************/
+
+void TMC5160::bbmTime(uint8_t val)
+{
+    uint32_t bits;
+    uint32_t mask;
+    if (val > 24 || val < 0)
+    {
+        bits = 24;
+    }
+    else 
+    {
+        bits = val;
+    }
+    bits = bits << DRVCONF_BBM_TIME_SHIFT;
+    mask = drvconf.bbmtime << DRVCONF_BBM_TIME_SHIFT;
+    modifyBits(mask, bits, &DRVCONF_CMD);
+}
+
+void TMC5160::bbmClks(uint8_t val)
+{
+    uint32_t bits;
+    uint32_t mask;
+    if (val > 15 || val < 0)
+    {
+        bits = 15;
+    }
+    else 
+    {
+        bits = val;
+    }
+    bits = bits << DRVCONF_BBM_CLKS_SHIFT;
+    mask = drvconf.bbmclks << DRVCONF_BBM_CLKS_SHIFT;
+    modifyBits(mask, bits, &DRVCONF_CMD);
+}
+
+void TMC5160::otSelect(uint8_t val)
+{
+    uint32_t bits;
+    uint32_t mask;
+    if (val > 3 || val < 0)
+    {
+        bits = 3;
+    }
+    else 
+    {
+        bits = val;
+    }
+    bits = bits << DRVCONF_OTSELECT_SHIFT;
+    mask = drvconf.otselect << DRVCONF_OTSELECT_SHIFT;
+    modifyBits(mask, bits, &DRVCONF_CMD);
+}
+
+void TMC5160::drvStrength(uint8_t val)
+{
+    uint32_t bits;
+    uint32_t mask;
+    if (val > 3 || val < 0)
+    {
+        bits = 3;
+    }
+    else 
+    {
+        bits = val;
+    }
+    bits = bits << DRVCONF_DRV_STRENGTH_SHIFT;
+    mask = drvconf.drvstrength << DRVCONF_DRV_STRENGTH_SHIFT;
+    modifyBits(mask, bits, &DRVCONF_CMD);
+}
+
+void TMC5160::iSenseFilt(uint8_t val)
+{
+    uint32_t bits;
+    uint32_t mask;
+    if (val > 3 || val < 0)
+    {
+        bits = 3;
+    }
+    else 
+    {
+        bits = val;
+    }
+    bits = bits << DRVCONF_FILT_ISENSE_SHIFT;
+    mask = drvconf.filt_isense << DRVCONF_FILT_ISENSE_SHIFT;
+    modifyBits(mask, bits, &DRVCONF_CMD);
+}
+
+/*********************************************************************************
+*************************** GLOBAL CURRENT SCALER FUNCTIONS **********************
+*********************************************************************************/
+
+void TMC5160::currentScale(uint8_t val)
+{
+    uint32_t* reg;
+    reg = &GLOBAL_SCALER_CMD;
+    if (val > 31 || val < 0)
+    {
+        *reg = 31;
+    }
+    else 
+    {
+        *reg = val;
+    }
+}
+
+/*********************************************************************************
+********************************* CURRENT FUNCTIONS ******************************
+*********************************************************************************/
+
+void TMC5160::holdCurrent(uint8_t val)
+{
+    uint32_t bits;
+    uint32_t mask;
+    if (val > 32 || val < 0)
+    {
+        bits = 32;
+    }
+    else 
+    {
+        bits = val;
+    }
+    bits = bits << IHOLD_IHOLD_SHIFT;
+    mask = ihold.ihold << IHOLD_IHOLD_SHIFT;
+    modifyBits(mask, bits, &IHOLD_CMD);
+}
+
+void TMC5160::runCurrent(uint8_t val)
+{
+    uint32_t bits;
+    uint32_t mask;
+    if (val > 32 || val < 0)
+    {
+        bits = 32;
+    }
+    else 
+    {
+        bits = val;
+    }
+    bits = bits << IHOLD_IRUN_SHIFT;
+    mask = ihold.irun << IHOLD_IRUN_SHIFT;
+    modifyBits(mask, bits, &IHOLD_CMD);
+}
+
+void TMC5160::holdDelay(uint8_t val)
+{
+    uint32_t bits;
+    uint32_t mask;
+    if (val > 15 || val < 0)
+    {
+        bits = 15;
+    }
+    else 
+    {
+        bits = val;
+    }
+    bits = bits << IHOLD_DELAY_SHIFT;
+    mask = ihold.delay << IHOLD_DELAY_SHIFT;
+    modifyBits(mask, bits, &IHOLD_CMD);
+}
+
+/*********************************************************************************
+************************* VELOCITY DEPENDENT DRV FUNCTIONS ***********************
+*********************************************************************************/
+
+void TMC5160::delayToPowerDown(uint8_t val)
+{
+    uint32_t* reg;
+    reg = &TPOWERD_CMD;
+
+    if (val > 255 || val < 0)
+    {
+        *reg = 255;
+    }
+    else 
+    {
+        *reg = val;
+    }
+}
+
+void TMC5160::upperVelocity(uint32_t val)
+{
+    uint32_t* reg;
+    reg = &TPWMTHRS_CMD;
+    *reg = val;
+}
+
+void TMC5160::lowerVelocity(uint32_t val)
+{
+    uint32_t* reg;
+    reg = &TCOOLTHRS_CMD;
+    *reg = val;
+}
+
+void TMC5160::highThresh(uint32_t val)
+{
+    uint32_t* reg;
+    reg = &THIGH_CMD;
+    *reg = val;
+}
+
+
+
+
+
+

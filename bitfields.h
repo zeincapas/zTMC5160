@@ -7,10 +7,13 @@
 **************************************ADDRESSES************************************
 **********************************************************************************/
 
+//ACCESSES
+const uint8_t WRITE_ACCESS = 0x80;
 
 //GENERAL CONFIGURATION REGISTERS
 const uint8_t GCONF_ADDR =  0x00;
 const uint8_t DRV_CONF_ADDR = 0x0A;
+const uint8_t XCOMPARE_ADDR = 0x05;
 const uint8_t GLOBAL_SCALER_ADDR = 0x0B;
 
 //VELOCITY DEPENDENT REGISTERS
@@ -85,6 +88,21 @@ const uint8_t COOLCONF_SEMAX_SHIFT = 8;
 const uint8_t COOLCONF_SEUP_SHIFT = 5;
 const uint8_t COOLCONF_SEMIN_SHIFT = 0;
 
+const uint8_t GCONF_SMALL_HYSTERESIS_SHIFT = 14;
+const uint8_t GCONF_SHAFT_SHIFT = 4;
+const uint8_t GCONF_PWM_MODE_SHIFT = 2;
+const uint8_t GCONF_FAST_STANDSTILL_SHIFT = 1;
+
+const uint8_t DRVCONF_FILT_ISENSE_SHIFT = 20;
+const uint8_t DRVCONF_DRV_STRENGTH_SHIFT = 18;
+const uint8_t DRVCONF_OTSELECT_SHIFT = 16;
+const uint8_t DRVCONF_BBM_CLKS_SHIFT = 8;
+const uint8_t DRVCONF_BBM_TIME_SHIFT = 0;
+
+const uint8_t IHOLD_DELAY_SHIFT = 16;
+const uint8_t IHOLD_IRUN_SHIFT = 8;
+const uint8_t IHOLD_IHOLD_SHIFT = 0;
+
 
 /**********************************************************************************
 *************************************BITMASKS**************************************
@@ -126,6 +144,22 @@ struct COOLCONF
     const uint32_t semin = 0b1111;
 };
 
+struct DRVCONF
+{
+    const uint32_t bbmtime = 0b11111;
+    const uint32_t bbmclks = 0b1111;
+    const uint32_t otselect = 0b11;
+    const uint32_t drvstrength = 0b11;
+    const uint32_t filt_isense = 0b11;
+};
+
+struct IHOLD
+{
+    const uint32_t ihold = 0b11111;
+    const uint32_t irun = 0b11111;
+    const uint32_t delay = 0b1111;
+};
+
 struct TMC5160_reg
 {
     const uint8_t address;
@@ -133,7 +167,6 @@ struct TMC5160_reg
     const uint8_t bitlength;
 
 };
-
 
 // TMC5160_reg GCONF{GCONF_ADDR, data, bitlength};
 

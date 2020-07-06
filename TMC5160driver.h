@@ -56,10 +56,56 @@ class TMC5160
         void seup(uint8_t val); //2 bit: current up step size
         void semin(uint8_t val); //4 bit: minimum stallGuard2 value for smart current control
         
+        //GCONF
+        void smallHysteresis(bool val);
+        void shaft(bool val);
+        void pwmMode(bool val);
+        void fastStandStill(bool val);
+
+        //XCOMPARE
+        void positionCompare(uint32_t val);
+
+        //DRVCONF
+        void iSenseFilt(uint8_t val);
+        void drvStrength(uint8_t val);
+        void otSelect(uint8_t val);
+        void bbmClks(uint8_t val);
+        void bbmTime(uint8_t val);
+
+        //GlOBAL_SCALER
+        void currentScale(uint8_t val);
+
+        //IHOLD 
+        void holdCurrent(uint8_t val);
+        void runCurrent(uint8_t val);
+        void holdDelay(uint8_t val);
+
+        //TPOWERDOWN
+        void delayToPowerDown(uint8_t val);
+
+        //TPWMTHRS
+        void upperVelocity(uint32_t val);
+
+        //TCOOLTHRS
+        void lowerVelocity(uint32_t val);
+
+        //THIGH
+        void highThresh(uint32_t val);
+
 
         uint32_t COOLCONF_CMD = 0;
         uint32_t CHOPCONF_CMD = 0;
         uint32_t PWMCONF_CMD = 0;
+        uint32_t GCONF_CMD = 0;
+        uint32_t DRVCONF_CMD = 0;
+        uint32_t XCOMPARE_CMD = 0;
+        uint32_t GLOBAL_SCALER_CMD = 0;
+        uint32_t IHOLD_CMD = 0;
+        uint32_t TPOWERD_CMD = 0;
+        uint32_t TPWMTHRS_CMD = 0;
+        uint32_t TCOOLTHRS_CMD = 0;
+        uint32_t THIGH_CMD = 0;
+
 };
 
 #endif
