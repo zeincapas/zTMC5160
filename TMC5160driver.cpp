@@ -26,6 +26,18 @@ void TMC5160::write(uint32_t* cmd, uint8_t address)
     SPI.endTransaction();
 }
 
+void TMC5160::write(int32_t* cmd, uint8_t address)
+{
+    //Acquire constructed bitfield and chop it up to 4 bytes. 
+    char writeField[4] = {(*cmd >> 24) & 0xFF, (*cmd >> 16) & 0xFF, (*cmd >> 8) & 0xFF, (*cmd) & 0xFF};
+    SPI.begin();
+    digitalWrite(cs, LOW);
+    SPI.transfer(address + WRITE_ACCESS);
+    SPI.transfer(&writeField, 4);
+    digitalWrite(cs, HIGH);
+    SPI.endTransaction();
+}
+
 void TMC5160::modifyBits(uint32_t mask, uint32_t edit, uint32_t* reg)
 {
     //clear the register first and then "OR" it after. 
@@ -37,7 +49,30 @@ void TMC5160::pushCommands()
     // Write to stepper driver
     // write(&CHOPCONF_CMD, CHOPCONF_ADDR);
     // write(&COOLCONF_CMD, COOLCONF_ADDR);
-    write(&PWMCONF_CMD, PWMCONF_ADDR);
+    // write(&PWMCONF_CMD, PWMCONF_ADDR);
+    write(&GCONF_CMD, GCONF_ADDR);
+    write(&DRVCONF_CMD, DRV_CONF_ADDR);
+    write(&XCOMPARE_CMD, XCOMPARE_ADDR);
+    write(&GLOBAL_SCALER_CMD, GLOBAL_SCALER_ADDR);
+    write(&IHOLD_CMD, IHOLD_RUN_ADDR);
+    write(&TPOWERD_CMD, TPOWER_DOWN_ADDR);
+    write(&TPWMTHRS_CMD, TPWMTHRS_ADDR);
+    write(&TCOOLTHRS_CMD, TCOOLTHRS_ADDR);
+    write(&THIGH_CMD, THIGH_ADDR);
+    write(&RAMP_MODE_CMD, RAMPMODE_ADDR);
+    write(&XACTUAL_CMD, XACTUAL_ADDR);
+    write(&VSTART_CMD, VSTART_ADDR);
+    write(&A1_CMD, ACC1_ADDR);
+    write(&V1_CMD, VEL1_ADDR);
+    write(&AMAX_CMD, AMAX_ADDR);
+    write(&VMAX_CMD, VMAX_ADDR);
+    write(&DMAX_CMD, DMAX_ADDR);
+    write(&D1_CMD, DEC1_ADDR);
+    write(&VSTOP_CMD, VSTOP_ADDR);
+    write(&TZEROWAIT_CMD, TZEROWAIT_ADDR);
+    write(&XTARGET_CMD, XTARGET_ADDR);
+
+
 }
 
 /*********************************************************************************
