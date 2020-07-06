@@ -80,17 +80,27 @@ class TMC5160
         void runCurrent(uint8_t val);
         void holdDelay(uint8_t val);
 
-        //TPOWERDOWN
+        //Velocity driven functions
         void delayToPowerDown(uint8_t val);
-
-        //TPWMTHRS
         void upperVelocity(uint32_t val);
-
-        //TCOOLTHRS
         void lowerVelocity(uint32_t val);
-
-        //THIGH
         void highThresh(uint32_t val);
+
+        //Motion controller functions
+        void rampMode(uint8_t val);
+        void xActual(int32_t val);
+        void vStart(uint32_t val);
+        void a1(uint16_t val);
+        void v1(uint32_t val);
+        void amax(uint16_t val);
+        void vmax(uint32_t val);
+        void dmax(uint16_t val);
+        void d1(uint16_t val);
+        void vstop(uint32_t val);
+        void tzerowait(uint16_t val);
+        void xTarget(int32_t val);
+
+
 
 
         uint32_t COOLCONF_CMD = 0;
@@ -105,6 +115,19 @@ class TMC5160
         uint32_t TPWMTHRS_CMD = 0;
         uint32_t TCOOLTHRS_CMD = 0;
         uint32_t THIGH_CMD = 0;
+        uint32_t RAMP_MODE_CMD = 0;
+        int32_t XACTUAL_CMD = 0;
+        uint32_t VSTART_CMD = 0;
+        uint32_t A1_CMD = 0;
+        uint32_t V1_CMD = 0;
+        uint32_t AMAX_CMD = 0;
+        uint32_t VMAX_CMD = 0;
+        uint32_t DMAX_CMD = 0;
+        uint32_t D1_CMD = 0;
+        uint32_t VSTOP_CMD = 0;
+        uint32_t TZEROWAIT_CMD = 0;
+        int32_t XTARGET_CMD = 0;
+
 
 };
 

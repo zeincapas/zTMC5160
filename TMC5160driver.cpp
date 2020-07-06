@@ -625,8 +625,126 @@ void TMC5160::highThresh(uint32_t val)
     *reg = val;
 }
 
+/*********************************************************************************
+************************* VELOCITY DEPENDENT DRV FUNCTIONS ***********************
+*********************************************************************************/
+
+void TMC5160::rampMode(uint8_t val)
+{
+    uint32_t* reg;
+    reg = &RAMP_MODE_CMD;
+    if (val > 3 || val < 0)
+    {
+        *reg = 0;
+    }
+    else 
+    {
+        *reg = val;
+    }
+}
+
+void TMC5160::xActual(int32_t val)
+{
+    int32_t* reg;
+    reg = &XACTUAL_CMD;
+    *reg = val;
+}
 
 
+void TMC5160::vStart(uint32_t val)
+{
+    uint32_t* reg;
+    reg = &VSTART_CMD;
+    if (val > 262143 || val < 0)
+    {
+        *reg = 262143;
+    }
+    else 
+    {
+        *reg = val;
+    }
+}
 
+void TMC5160::a1(uint16_t val)
+{
+    uint32_t* reg;
+    reg = &A1_CMD;
+    *reg = val;
+}
 
+void TMC5160::v1(uint32_t val)
+{
+    uint32_t* reg;
+    reg = &V1_CMD;
+    if (val > 1048575 || val < 0)
+    {
+        *reg = 1048575;
+    }
+    else 
+    {
+        *reg = val;
+    }
+}
 
+void TMC5160::amax(uint16_t val)
+{
+    uint32_t* reg;
+    reg = &AMAX_CMD;
+    *reg = val;
+}
+
+void TMC5160::vmax(uint32_t val)
+{
+    uint32_t* reg;
+    reg = &VMAX_CMD;
+    if (val > 8388607 || val < 0)
+    {
+        *reg = 8388607;
+    }
+    else 
+    {
+        *reg = val;
+    }
+}
+
+void TMC5160::dmax(uint16_t val)
+{
+    uint32_t* reg;
+    reg = &DMAX_CMD;
+    *reg = val;
+}
+
+void TMC5160::d1(uint16_t val)
+{
+    uint32_t* reg;
+    reg = &D1_CMD;
+    *reg = val;
+}
+
+void TMC5160::vstop(uint32_t val)
+{
+    uint32_t* reg;
+    reg = &VSTOP_CMD;
+    if (val > 262143 || val < 0)
+    {
+        *reg = 262143;
+    }
+    else 
+    {
+        *reg = val;
+    }
+}
+
+void TMC5160::tzerowait(uint16_t val)
+{
+    uint32_t* reg;
+    reg = &TZEROWAIT_CMD;
+    *reg = val;
+}
+
+void TMC5160::xTarget(int32_t val)
+{
+    int32_t* reg;
+    reg = &XTARGET_CMD;
+    *reg = val;
+}

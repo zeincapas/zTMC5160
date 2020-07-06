@@ -103,6 +103,18 @@ const uint8_t IHOLD_DELAY_SHIFT = 16;
 const uint8_t IHOLD_IRUN_SHIFT = 8;
 const uint8_t IHOLD_IHOLD_SHIFT = 0;
 
+const uint8_t SWMODE_SOFTSTOP_SHIFT = 11;
+const uint8_t SWMODE_SG_STOP_SHIFT = 10;
+const uint8_t SWMODE_LATCHR_INACTIVE_SHIFT = 8;
+const uint8_t SWMODE_LATCHR_ACTIVE_SHIFT = 7;
+const uint8_t SWMODE_LATCHL_INACTIVE_SHIFT = 6;
+const uint8_t SWMODE_LATCHL_ACTIVE_SHIFT = 5;
+const uint8_t SWMODE_LATCH_SWAP_SHIFT = 4;
+const uint8_t SWMODE_POLR_STOP = 3;
+const uint8_t SWMODE_POLL_STOP = 2;
+const uint8_t SWMODE_STOPR_ENABLE = 1;
+const uint8_t SWMODE_STOPL_ENABLE = 0;
+
 
 /**********************************************************************************
 *************************************BITMASKS**************************************
