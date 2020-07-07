@@ -47,9 +47,9 @@ void TMC5160::modifyBits(uint32_t mask, uint32_t edit, uint32_t* reg)
 void TMC5160::pushCommands()
 {
     // Write to stepper driver
-    // write(&CHOPCONF_CMD, CHOPCONF_ADDR);
-    // write(&COOLCONF_CMD, COOLCONF_ADDR);
-    // write(&PWMCONF_CMD, PWMCONF_ADDR);
+    write(&CHOPCONF_CMD, CHOPCONF_ADDR);
+    write(&COOLCONF_CMD, COOLCONF_ADDR);
+    write(&PWMCONF_CMD, PWMCONF_ADDR);
     write(&GCONF_CMD, GCONF_ADDR);
     write(&DRVCONF_CMD, DRV_CONF_ADDR);
     write(&XCOMPARE_CMD, XCOMPARE_ADDR);

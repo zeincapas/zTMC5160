@@ -12,7 +12,7 @@ void setup()
     driver.init();
 
 
-    driver.mres(2);
+    driver.mres(0);
     driver.tpfd(12);
     driver.vhighchm(1);
     driver.vhighfs(0);
@@ -37,6 +37,41 @@ void setup()
     driver.pwm_freq(1);
     driver.pwm_grad(25);
     driver.pwm_ofs(30);
+
+    driver.fastStandStill(0);
+    driver.pwmMode(1);
+    driver.shaft(0);
+    driver.smallHysteresis(0);
+
+    driver.iSenseFilt(0);
+    driver.drvStrength(2);
+    driver.otSelect(0);
+    driver.bbmTime(0);
+    driver.bbmClks(4);
+
+    driver.currentScale(0);
+
+    driver.holdCurrent(15);
+    driver.runCurrent(31);
+    driver.holdDelay(3);
+
+    driver.delayToPowerDown(10);
+    driver.upperVelocity(60000);
+    driver.lowerVelocity(4000);
+    driver.highThresh(2000);
+
+    driver.rampMode(0);
+    // driver.xActual();
+    driver.vStart(50);
+    driver.a1(100);
+    driver.v1(100);
+    driver.amax(300);
+    driver.vmax(200);
+    driver.dmax(300);
+    driver.d1(100);
+    driver.vstop(100);
+    driver.tzerowait(256);
+    driver.xTarget(500);
 
 
     driver.pushCommands();
