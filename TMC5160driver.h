@@ -99,6 +99,7 @@ class TMC5160
         void d1(uint16_t val);
         void vstop(uint32_t val);
         void tzerowait(uint16_t val);
+        void vdcmin(uint32_t val);
         void xTarget(int32_t val);
 
 
@@ -127,6 +128,7 @@ class TMC5160
         uint32_t D1_CMD = 0;
         uint32_t VSTOP_CMD = 0;
         uint32_t TZEROWAIT_CMD = 0;
+        uint32_t VDCMIN_CMD = 0;
         int32_t XTARGET_CMD = 0;
 
 

@@ -70,6 +70,7 @@ void TMC5160::pushCommands()
     write(&D1_CMD, DEC1_ADDR);
     write(&VSTOP_CMD, VSTOP_ADDR);
     write(&TZEROWAIT_CMD, TZEROWAIT_ADDR);
+    write(&VDCMIN_CMD, VDCMIN_ADDR);
     write(&XTARGET_CMD, XTARGET_ADDR);
 
 
@@ -661,7 +662,7 @@ void TMC5160::highThresh(uint32_t val)
 }
 
 /*********************************************************************************
-************************* VELOCITY DEPENDENT DRV FUNCTIONS ***********************
+***************************** MOTION CONTROLLER FUNCTI*ONS ***********************
 *********************************************************************************/
 
 void TMC5160::rampMode(uint8_t val)
@@ -774,6 +775,13 @@ void TMC5160::tzerowait(uint16_t val)
 {
     uint32_t* reg;
     reg = &TZEROWAIT_CMD;
+    *reg = val;
+}
+
+void TMC5160::vdcmin(uint32_t val)
+{
+    uint32_t* reg;
+    reg = &VDCMIN_CMD;
     *reg = val;
 }
 

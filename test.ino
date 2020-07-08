@@ -12,24 +12,24 @@ void setup()
     driver.init();
 
 
-    driver.mres(0);
+    driver.mres(255);
     driver.tpfd(12);
-    driver.vhighchm(1);
+    driver.vhighchm(0);
     driver.vhighfs(0);
     driver.tbl(36);
-    driver.hend(-1);
-    driver.hstrt(6);
-    driver.toff(7);
+    driver.hend(20);
+    driver.hstrt(8);
+    driver.toff(2);
 
     driver.sfilt(1);
     driver.sgt(3);
-    driver.seimin(0);
-    driver.sedn(1);
-    driver.semax(13);
+    driver.seimin(1);
+    driver.sedn(2);
+    driver.semax(20);
     driver.seup(8);
-    driver.semin(13);
+    driver.semin(3);
 
-    driver.pwm_lim(12);
+    driver.pwm_lim(7);
     driver.pwm_reg(8); //Hardcoded to output 5
     driver.freewheel(0);
     driver.pwm_autograd(1);
@@ -39,7 +39,7 @@ void setup()
     driver.pwm_ofs(30);
 
     driver.fastStandStill(0);
-    driver.pwmMode(1);
+    driver.pwmMode(2);
     driver.shaft(0);
     driver.smallHysteresis(0);
 
@@ -51,27 +51,28 @@ void setup()
 
     driver.currentScale(0);
 
-    driver.holdCurrent(15);
+    driver.holdCurrent(0);
     driver.runCurrent(31);
     driver.holdDelay(3);
 
     driver.delayToPowerDown(10);
-    driver.upperVelocity(60000);
+    driver.upperVelocity(30000);
     driver.lowerVelocity(4000);
-    driver.highThresh(2000);
+    driver.highThresh(500);
 
     driver.rampMode(0);
     // driver.xActual();
-    driver.vStart(50);
-    driver.a1(100);
-    driver.v1(100);
-    driver.amax(300);
-    driver.vmax(200);
-    driver.dmax(300);
-    driver.d1(100);
-    driver.vstop(100);
+    driver.vStart(0);
+    driver.a1(20000);
+    driver.v1(30000);
+    driver.amax(5000);
+    driver.vmax(15000);
+    driver.dmax(5000);
+    driver.d1(20000);
+    driver.vstop(10);
     driver.tzerowait(256);
-    driver.xTarget(500);
+    driver.vdcmin(0);
+    driver.xTarget(50000);
 
 
     driver.pushCommands();
