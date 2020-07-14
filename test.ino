@@ -12,14 +12,14 @@ void setup()
     driver.init();
 
 
-    driver.mres(255);
+    driver.mres(0);
     driver.tpfd(12);
     driver.vhighchm(0);
     driver.vhighfs(0);
-    driver.tbl(36);
-    driver.hend(20);
-    driver.hstrt(8);
-    driver.toff(2);
+    driver.tbl(2);
+    driver.hend(0);
+    driver.hstrt(4);
+    driver.toff(5);
 
     driver.sfilt(1);
     driver.sgt(3);
@@ -39,7 +39,7 @@ void setup()
     driver.pwm_ofs(30);
 
     driver.fastStandStill(0);
-    driver.pwmMode(2);
+    driver.pwmMode(1);
     driver.shaft(0);
     driver.smallHysteresis(0);
 
@@ -51,28 +51,30 @@ void setup()
 
     driver.currentScale(0);
 
-    driver.holdCurrent(0);
+    driver.holdCurrent(15);
     driver.runCurrent(31);
     driver.holdDelay(3);
 
     driver.delayToPowerDown(10);
-    driver.upperVelocity(30000);
-    driver.lowerVelocity(4000);
-    driver.highThresh(500);
+    driver.upperVelocity(50);
+    driver.lowerVelocity(75);
+    driver.highThresh(100);
+
+    driver.dcctrl(37);
 
     driver.rampMode(0);
     // driver.xActual();
-    driver.vStart(0);
-    driver.a1(20000);
-    driver.v1(30000);
-    driver.amax(5000);
-    driver.vmax(15000);
-    driver.dmax(5000);
-    driver.d1(20000);
-    driver.vstop(10);
+    driver.vStart(10);
+    driver.a1(500);
+    driver.v1(5000);
+    driver.amax(3000);
+    driver.vmax(60000);
+    driver.dmax(1000);
+    driver.d1(500);
+    driver.vstop(50);
     driver.tzerowait(256);
     driver.vdcmin(0);
-    driver.xTarget(50000);
+    driver.xTarget(-500000); //-ve stretch, +ve destretch
 
 
     driver.pushCommands();

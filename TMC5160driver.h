@@ -102,9 +102,13 @@ class TMC5160
         void vdcmin(uint32_t val);
         void xTarget(int32_t val);
 
+        //DRIVER functions
+        void dcctrl(uint32_t val);
 
-
-
+        //READ buffer
+        uint32_t READ_BUF = 0;
+        
+        //WRITE CMD
         uint32_t COOLCONF_CMD = 0;
         uint32_t CHOPCONF_CMD = 0;
         uint32_t PWMCONF_CMD = 0;
@@ -130,6 +134,7 @@ class TMC5160
         uint32_t TZEROWAIT_CMD = 0;
         uint32_t VDCMIN_CMD = 0;
         int32_t XTARGET_CMD = 0;
+        uint32_t DCCTRL_CMD = 0;
 
 
 };

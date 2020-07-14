@@ -72,7 +72,7 @@ void TMC5160::pushCommands()
     write(&TZEROWAIT_CMD, TZEROWAIT_ADDR);
     write(&VDCMIN_CMD, VDCMIN_ADDR);
     write(&XTARGET_CMD, XTARGET_ADDR);
-
+    write(&DCCTRL_CMD, DCCTRL_ADDR);
 
 }
 
@@ -556,9 +556,9 @@ void TMC5160::currentScale(uint8_t val)
 {
     uint32_t* reg;
     reg = &GLOBAL_SCALER_CMD;
-    if (val > 31 || val < 0)
+    if (val > 256 || val < 32)
     {
-        *reg = 31;
+        *reg = 256;
     }
     else 
     {
@@ -789,5 +789,16 @@ void TMC5160::xTarget(int32_t val)
 {
     int32_t* reg;
     reg = &XTARGET_CMD;
+    *reg = val;
+}
+
+/*********************************************************************************
+******************************* DRIVER FUNCTIONS *********************************
+*********************************************************************************/
+
+void TMC5160::dcctrl(uint32_t val)
+{
+    uint32_t* reg;
+    reg = &DCCTRL_CMD;
     *reg = val;
 }
