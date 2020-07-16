@@ -20,7 +20,7 @@ class TMC5160
         void write(uint32_t* cmd, uint8_t address); //TODO
         void write(int32_t* cmd, uint8_t address);
         void modifyBits(uint32_t mask, uint32_t edit, uint32_t* reg); //TODO
-        void pushCommands(void); //TODO
+        void pushInit(void); //TODO
 
         //CHOPCONF
         void mres( uint8_t val); //4 bits: 0000 = 256, 0001 = 128, 1000 = FULLSTEP

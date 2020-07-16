@@ -44,7 +44,7 @@ void TMC5160::modifyBits(uint32_t mask, uint32_t edit, uint32_t* reg)
     *reg = (*reg & ~mask) | edit;
 }
 
-void TMC5160::pushCommands()
+void TMC5160::pushInit()
 {
     // Write to stepper driver
     write(&CHOPCONF_CMD, CHOPCONF_ADDR);
@@ -71,7 +71,6 @@ void TMC5160::pushCommands()
     write(&VSTOP_CMD, VSTOP_ADDR);
     write(&TZEROWAIT_CMD, TZEROWAIT_ADDR);
     write(&VDCMIN_CMD, VDCMIN_ADDR);
-    write(&XTARGET_CMD, XTARGET_ADDR);
     write(&DCCTRL_CMD, DCCTRL_ADDR);
 
 }

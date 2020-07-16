@@ -1,7 +1,13 @@
 #include "StretcherActuator.h"
+#include "TMC5160driver.h"
+#include "bitfields.h"
+
+TMC5160 driver(24,5);
 
 void Actuator::init()
 {
+    driver.init();
+
     driver.mres(0);
     driver.tpfd(12);
     driver.vhighchm(0);
@@ -53,19 +59,23 @@ void Actuator::init()
     driver.dcctrl(37);
 
     driver.rampMode(0);
-    // driver.xActual();
     driver.vStart(10);
     driver.a1(500);
     driver.v1(5000);
     driver.amax(3000);
-    driver.vmax(60000);
+    driver.vmax(15000);
     driver.dmax(1000);
     driver.d1(500);
     driver.vstop(50);
     driver.tzerowait(256);
     driver.vdcmin(0);
-    driver.xTarget(-500000); //-ve stretch, +ve destretch
 
 
-    driver.pushCommands();
+    driver.pushInit();
+}
+
+void Actuator::setPosition(int32_t val)
+{
+    driver.xTarget(val);
+    driver.write(&driver.XTARGET_CMD, XTARGET_ADDR);
 }
