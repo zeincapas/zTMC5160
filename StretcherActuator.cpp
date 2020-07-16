@@ -79,3 +79,108 @@ void Actuator::setPosition(int32_t val)
     driver.xTarget(val);
     driver.write(&driver.XTARGET_CMD, XTARGET_ADDR);
 }
+
+void Actuator::setMicrostep(uint8_t val)
+{
+    driver.mres(val);
+    driver.write(&driver.CHOPCONF_CMD, CHOPCONF_ADDR);
+}
+
+void Actuator::setMode(uint8_t val)
+{
+    switch (val)
+    {
+        case 0:
+            driver.vStart(10);
+            driver.a1(500);
+            driver.v1(5000);
+            driver.amax(3000);
+            driver.vmax(30000);
+            driver.dmax(1000);
+            driver.d1(500);
+            driver.vstop(50);
+            driver.tzerowait(256);
+            driver.vdcmin(0);
+            driver.write(&driver.VSTART_CMD, VSTART_ADDR);
+            driver.write(&driver.A1_CMD, ACC1_ADDR);
+            driver.write(&driver.V1_CMD, VEL1_ADDR);
+            driver.write(&driver.AMAX_CMD, AMAX_ADDR);
+            driver.write(&driver.VMAX_CMD, VMAX_ADDR);
+            driver.write(&driver.DMAX_CMD, DMAX_ADDR);
+            driver.write(&driver.D1_CMD, DEC1_ADDR);
+            driver.write(&driver.VSTOP_CMD, VSTOP_ADDR);
+            driver.write(&driver.TZEROWAIT_CMD, TZEROWAIT_ADDR);
+            driver.write(&driver.VDCMIN_CMD, VDCMIN_ADDR);
+            break;
+
+        case 1:
+            driver.vStart(10);
+            driver.a1(500);
+            driver.v1(5000);
+            driver.amax(3000);
+            driver.vmax(15000);
+            driver.dmax(1000);
+            driver.d1(500);
+            driver.vstop(50);
+            driver.tzerowait(256);
+            driver.vdcmin(0);
+            driver.write(&driver.VSTART_CMD, VSTART_ADDR);
+            driver.write(&driver.A1_CMD, ACC1_ADDR);
+            driver.write(&driver.V1_CMD, VEL1_ADDR);
+            driver.write(&driver.AMAX_CMD, AMAX_ADDR);
+            driver.write(&driver.VMAX_CMD, VMAX_ADDR);
+            driver.write(&driver.DMAX_CMD, DMAX_ADDR);
+            driver.write(&driver.D1_CMD, DEC1_ADDR);
+            driver.write(&driver.VSTOP_CMD, VSTOP_ADDR);
+            driver.write(&driver.TZEROWAIT_CMD, TZEROWAIT_ADDR);
+            driver.write(&driver.VDCMIN_CMD, VDCMIN_ADDR);
+            break;
+
+        case 2:
+            driver.vStart(10);
+            driver.a1(500);
+            driver.v1(5000);
+            driver.amax(3000);
+            driver.vmax(5500);
+            driver.dmax(1000);
+            driver.d1(500);
+            driver.vstop(50);
+            driver.tzerowait(256);
+            driver.vdcmin(0);
+            driver.write(&driver.VSTART_CMD, VSTART_ADDR);
+            driver.write(&driver.A1_CMD, ACC1_ADDR);
+            driver.write(&driver.V1_CMD, VEL1_ADDR);
+            driver.write(&driver.AMAX_CMD, AMAX_ADDR);
+            driver.write(&driver.VMAX_CMD, VMAX_ADDR);
+            driver.write(&driver.DMAX_CMD, DMAX_ADDR);
+            driver.write(&driver.D1_CMD, DEC1_ADDR);
+            driver.write(&driver.VSTOP_CMD, VSTOP_ADDR);
+            driver.write(&driver.TZEROWAIT_CMD, TZEROWAIT_ADDR);
+            driver.write(&driver.VDCMIN_CMD, VDCMIN_ADDR);
+            break;
+        
+        case 3:
+            driver.vStart(10);
+            driver.a1(500);
+            driver.v1(5000);
+            driver.amax(3000);
+            driver.vmax(5000);
+            driver.dmax(1000);
+            driver.d1(500);
+            driver.vstop(50);
+            driver.tzerowait(256);
+            driver.vdcmin(0);
+            driver.write(&driver.VSTART_CMD, VSTART_ADDR);
+            driver.write(&driver.A1_CMD, ACC1_ADDR);
+            driver.write(&driver.V1_CMD, VEL1_ADDR);
+            driver.write(&driver.AMAX_CMD, AMAX_ADDR);
+            driver.write(&driver.VMAX_CMD, VMAX_ADDR);
+            driver.write(&driver.DMAX_CMD, DMAX_ADDR);
+            driver.write(&driver.D1_CMD, DEC1_ADDR);
+            driver.write(&driver.VSTOP_CMD, VSTOP_ADDR);
+            driver.write(&driver.TZEROWAIT_CMD, TZEROWAIT_ADDR);
+            driver.write(&driver.VDCMIN_CMD, VDCMIN_ADDR);
+            break;
+    }
+}
+

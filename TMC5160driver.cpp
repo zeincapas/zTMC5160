@@ -60,17 +60,17 @@ void TMC5160::pushInit()
     write(&TCOOLTHRS_CMD, TCOOLTHRS_ADDR);
     write(&THIGH_CMD, THIGH_ADDR);
     write(&RAMP_MODE_CMD, RAMPMODE_ADDR);
-    write(&XACTUAL_CMD, XACTUAL_ADDR);
-    write(&VSTART_CMD, VSTART_ADDR);
-    write(&A1_CMD, ACC1_ADDR);
-    write(&V1_CMD, VEL1_ADDR);
-    write(&AMAX_CMD, AMAX_ADDR);
-    write(&VMAX_CMD, VMAX_ADDR);
-    write(&DMAX_CMD, DMAX_ADDR);
-    write(&D1_CMD, DEC1_ADDR);
-    write(&VSTOP_CMD, VSTOP_ADDR);
-    write(&TZEROWAIT_CMD, TZEROWAIT_ADDR);
-    write(&VDCMIN_CMD, VDCMIN_ADDR);
+    // write(&XACTUAL_CMD, XACTUAL_ADDR);
+    // write(&VSTART_CMD, VSTART_ADDR);
+    // write(&A1_CMD, ACC1_ADDR);
+    // write(&V1_CMD, VEL1_ADDR);
+    // write(&AMAX_CMD, AMAX_ADDR);
+    // write(&VMAX_CMD, VMAX_ADDR);
+    // write(&DMAX_CMD, DMAX_ADDR);
+    // write(&D1_CMD, DEC1_ADDR);
+    // write(&VSTOP_CMD, VSTOP_ADDR);
+    // write(&TZEROWAIT_CMD, TZEROWAIT_ADDR);
+    // write(&VDCMIN_CMD, VDCMIN_ADDR);
     write(&DCCTRL_CMD, DCCTRL_ADDR);
 
 }

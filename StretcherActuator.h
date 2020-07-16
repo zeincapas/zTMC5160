@@ -7,7 +7,6 @@ class Actuator
         void init(void);
         void setPosition(int32_t);
         void setMicrostep(uint8_t);
-        void setSpeed(uint32_t);
         void setMode(uint8_t);
         uint32_t getPosition(void);
         bool checkStall(void);
