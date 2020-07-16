@@ -1,17 +1,7 @@
-#include <Arduino.h>
-#include "TMC5160driver.h"
-#include <SPI.h>
-// #include "TMC5160_bitfields.h"
+#include "StretcherActuator.h"
 
-TMC5160 driver(24,5);
-
-
-void setup()
+void Actuator::init()
 {
-    Serial.begin(9600);
-    driver.init();
-
-
     driver.mres(0);
     driver.tpfd(12);
     driver.vhighchm(0);
@@ -78,9 +68,4 @@ void setup()
 
 
     driver.pushCommands();
-}
-
-void loop()
-{
-    ;
 }

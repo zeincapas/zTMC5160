@@ -11,6 +11,5 @@ class IActuator
     virtual void setMode(uint8_t) = 0; //Velocity +ve, Velocity -ve, position. 
     virtual uint32_t getPosition() = 0;
     virtual bool checkStall() = 0;
-
 };
 #endif
