@@ -47,7 +47,7 @@ void Actuator::init()
 
     driver.currentScale(0);
 
-    driver.holdCurrent(15);
+    driver.holdCurrent(0);
     driver.runCurrent(31);
     driver.holdDelay(3);
 
@@ -95,7 +95,7 @@ void Actuator::setMode(uint8_t val)
             driver.a1(500);
             driver.v1(5000);
             driver.amax(3000);
-            driver.vmax(30000);
+            driver.vmax(60000); //THIS IS THE SPEED VALUE
             driver.dmax(1000);
             driver.d1(500);
             driver.vstop(50);
@@ -164,7 +164,7 @@ void Actuator::setMode(uint8_t val)
             driver.a1(500);
             driver.v1(5000);
             driver.amax(3000);
-            driver.vmax(5000);
+            driver.vmax(500);
             driver.dmax(1000);
             driver.d1(500);
             driver.vstop(50);

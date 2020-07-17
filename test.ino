@@ -1,5 +1,4 @@
 #include <Arduino.h>
-#include "TMC5160driver.h"
 #include <SPI.h>
 #include "StretcherActuator.h"
 // #include "TMC5160_bitfields.h"
@@ -10,8 +9,8 @@ void setup()
 {
     Serial.begin(9600);
     stretcher.init();
-    stretcher.setMode(1);
-    stretcher.setPosition(55000);
+    stretcher.setMode(0);
+    stretcher.setPosition(50000); //+ve is stretching, -ve is destretching
 }
 
 void loop()
