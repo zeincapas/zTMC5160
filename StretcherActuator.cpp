@@ -15,7 +15,7 @@ void Actuator::init()
     driver.tbl(2);
     driver.hend(0);
     driver.hstrt(4);
-    driver.toff(5);
+    driver.toff(0); // should be 5, turn to 0 for turning off chopper
 
     driver.sfilt(1);
     driver.sgt(3);
