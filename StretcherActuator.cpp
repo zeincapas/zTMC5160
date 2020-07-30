@@ -15,7 +15,7 @@ void Actuator::init()
     driver.tbl(2);
     driver.hend(0);
     driver.hstrt(4);
-    driver.toff(0); // should be 5, turn to 0 for turning off chopper
+    driver.toff(5); // should be 5, turn to 0 for turning off chopper
 
     driver.sfilt(1);
     driver.sgt(3);
@@ -84,6 +84,37 @@ void Actuator::setMicrostep(uint8_t val)
 {
     driver.mres(val);
     driver.write(&driver.CHOPCONF_CMD, CHOPCONF_ADDR);
+}
+
+void Actuator::powerMode(bool flag)
+{
+    if (flag == 1)
+    {
+        driver.toff(5);
+    }
+    else
+    {
+        driver.toff(0);
+    }
+    driver.write(&driver.CHOPCONF_CMD, CHOPCONF_ADDR);
+}
+
+void Actuator::setAcceleration(uint16_t value)
+{
+    driver.a1(value);
+    driver.amax(value/2);
+    driver.d1(value);
+    driver.dmax(value/2);
+    driver.write(&driver.A1_CMD, ACC1_ADDR);
+    driver.write(&driver.AMAX_CMD, AMAX_ADDR);
+    driver.write(&driver.D1_CMD, DEC1_ADDR);
+    driver.write(&driver.DMAX_CMD, DMAX_ADDR);
+}
+
+void Actuator::setVelocity(uint32_t value)
+{
+    driver.vmax(value);
+    driver.write(&driver.VMAX_CMD, VMAX_ADDR);
 }
 
 void Actuator::setMode(uint8_t val)
