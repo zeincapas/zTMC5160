@@ -38,6 +38,37 @@ void TMC5160::write(int32_t* cmd, uint8_t address)
     SPI.endTransaction();
 }
 
+int32_t TMC5160::read(uint8_t address)
+{
+    uint16_t dummy = 0;
+    int32_t readOut;
+    int32_t readOut2; 
+    char writeField[4] = {(0x00 >> 24) & 0xFF, (0x00 >> 16) & 0xFF, (0x00 >> 8) & 0xFF, (0x00) & 0xFF};
+    
+    SPI.begin();
+    digitalWrite(cs, LOW);
+    SPI.transfer(address);
+    SPI.transfer(&writeField, 4);
+    digitalWrite(cs, HIGH);
+    SPI.endTransaction();
+
+    SPI.begin();
+    digitalWrite(cs, LOW);
+    SPI.transfer(address);
+    readOut = SPI.transfer16(dummy);
+    readOut << 16;
+    readOut2 = SPI.transfer16(dummy);
+    modifyBits(readMask, readOut2, &readOut);
+    SPI.endTransaction();
+
+    return readOut;
+}
+
+void TMC5160::modifyBits(uint32_t mask, int32_t edit, int32_t *reg)
+{
+    *reg = (*reg & ~mask) | edit;    
+}
+
 void TMC5160::modifyBits(uint32_t mask, uint32_t edit, uint32_t* reg)
 {
     //clear the register first and then "OR" it after. 
@@ -678,11 +709,11 @@ void TMC5160::rampMode(uint8_t val)
     }
 }
 
-void TMC5160::xActual(int32_t val)
+void TMC5160::xActual(void)
 {
     int32_t* reg;
     reg = &XACTUAL_CMD;
-    *reg = val;
+    *reg = 0x00;
 }
 
 

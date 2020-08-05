@@ -99,6 +99,12 @@ void Actuator::powerMode(bool flag)
     driver.write(&driver.CHOPCONF_CMD, CHOPCONF_ADDR);
 }
 
+int32_t Actuator::getPosition()
+{
+    int32_t position = driver.read(XACTUAL_ADDR);
+    return position;
+}
+
 void Actuator::setAcceleration(uint16_t value)
 {
     driver.a1(value);

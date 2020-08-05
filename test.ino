@@ -9,7 +9,7 @@ void setup()
 {
     Serial.begin(9600);
     stretcher.init();
-    stretcher.setMode(0);
+    stretcher.setToDefault();
     stretcher.setPosition(100000); //+ve is stretching, -ve is destretching
 }
 

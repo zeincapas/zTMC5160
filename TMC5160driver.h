@@ -17,9 +17,11 @@ class TMC5160
 
         //Bitfield constructor functions
         void init(void); //TODO
-        void write(uint32_t* cmd, uint8_t address); //TODO
+        void write(uint32_t* cmd, uint8_t address);
         void write(int32_t* cmd, uint8_t address);
+        int32_t read(uint8_t address);
         void modifyBits(uint32_t mask, uint32_t edit, uint32_t* reg); //TODO
+        void modifyBits(uint32_t mask, int32_t edit, int32_t *reg);
         void pushInit(void); //TODO
 
         //CHOPCONF
@@ -83,7 +85,7 @@ class TMC5160
 
         //Motion controller functions
         void rampMode(uint8_t val);
-        void xActual(int32_t val);
+        void xActual(void);
         void vStart(uint32_t val);
         void a1(uint16_t val);
         void v1(uint32_t val);
@@ -100,7 +102,7 @@ class TMC5160
         void dcctrl(uint32_t val);
 
         //READ buffer
-        uint32_t READ_BUF = 0;
+        int32_t READ_BUF = 0;
         
         //WRITE CMD
         uint32_t COOLCONF_CMD = 0;
