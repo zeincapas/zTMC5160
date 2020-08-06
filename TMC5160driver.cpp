@@ -56,7 +56,7 @@ int32_t TMC5160::read(uint8_t address)
     digitalWrite(cs, LOW);
     SPI.transfer(address);
     readOut = SPI.transfer16(dummy);
-    readOut << 16;
+    readOut = readOut << 16;
     readOut2 = SPI.transfer16(dummy);
     digitalWrite(cs, HIGH);
     SPI.endTransaction();
