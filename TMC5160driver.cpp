@@ -18,7 +18,8 @@ void TMC5160::write(uint32_t* cmd, uint8_t address)
 {
     //Acquire constructed bitfield and chop it up to 4 bytes. 
     char writeField[4] = {(*cmd >> 24) & 0xFF, (*cmd >> 16) & 0xFF, (*cmd >> 8) & 0xFF, (*cmd) & 0xFF};
-    SPI.beginTransaction(SPISettings(2000000, MSBFIRST, SPI_MODE0));
+    // SPI.beginTransaction(SPISettings(4000000, MSBFIRST, SPI_MODE3));
+    SPI.begin();
     digitalWrite(cs, LOW);
     SPI.transfer(address + WRITE_ACCESS);
     SPI.transfer(&writeField, 4);
@@ -30,7 +31,8 @@ void TMC5160::write(int32_t* cmd, uint8_t address)
 {
     //Acquire constructed bitfield and chop it up to 4 bytes. 
     char writeField[4] = {(*cmd >> 24) & 0xFF, (*cmd >> 16) & 0xFF, (*cmd >> 8) & 0xFF, (*cmd) & 0xFF};
-    SPI.beginTransaction(SPISettings(2000000, MSBFIRST, SPI_MODE0));
+    SPI.begin();
+    // SPI.beginTransaction(SPISettings(4000000, MSBFIRST, SPI_MODE3));
     digitalWrite(cs, LOW);
     SPI.transfer(address + WRITE_ACCESS);
     SPI.transfer(&writeField, 4);
@@ -45,14 +47,16 @@ int32_t TMC5160::read(uint8_t address)
     int32_t readOut2; 
     char writeField[4] = {(0x00 >> 24) & 0xFF, (0x00 >> 16) & 0xFF, (0x00 >> 8) & 0xFF, (0x00) & 0xFF};
     
-    SPI.beginTransaction(SPISettings(2000000, MSBFIRST, SPI_MODE0));
+    // SPI.beginTransaction(SPISettings(4000000, MSBFIRST, SPI_MODE3));
+    SPI.begin();
     digitalWrite(cs, LOW);
     SPI.transfer(address);
     SPI.transfer(&writeField, 4);
     digitalWrite(cs, HIGH);
     SPI.endTransaction();
 
-    SPI.beginTransaction(SPISettings(2000000, MSBFIRST, SPI_MODE0));
+    // SPI.beginTransaction(SPISettings(4000000, MSBFIRST, SPI_MODE3));
+    SPI.begin();
     digitalWrite(cs, LOW);
     SPI.transfer(address);
     readOut = SPI.transfer16(dummy);

@@ -1,5 +1,5 @@
 {
     "board": "arduino:samd:mkrzero",
     "sketch": "test.ino",
-    "port": "COM24"
+    "port": "COM73"
 }
